@@ -1,12 +1,8 @@
 package com.springbootmybatis.mapper;
 
-import com.springbootmybatis.entity.Manager;
 import com.springbootmybatis.entity.Passenger;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
-import javax.annotation.Resource;
-import java.util.Set;
 
 
 @Mapper

@@ -9,6 +9,7 @@
         <result property="nationality" column="nationality"/>
         <result property="expire" column="expire"/>
         <result property="passengerId" column="passenger_id"/>
+        <!-- 关联查询，property = 实体类属性名，column = 数据库字段名，javaType = 实体类属性类型-->
         <association property="passenger" column="passenger_id"
                      javaType="Passenger"
                      select="com.springbootmybatis.mapper.PassengerMapper.selectPassengerById"/>
