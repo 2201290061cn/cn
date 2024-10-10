@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--MyBatis配置-->
+<!-- 根标签 -->
+<configuration>
+    <!--JDBC环境配置、选中默认环境-->
+    <!-- 核心配置 -->
+    <environments default="MySqlDB">
+        <!--MySql数据库环境配置-->
+        <environment id="MySqlDB">
+            <!--事务管理-->
+            <transactionManager type="JDBC"/>
+            <!--连接池-->
+            <!-- 数据库源,如果使用自带的数据库源,那么以下四个必须要配齐.如果缺了驱动,那么就会报空指针异常,因为找不到需要的驱动 -->
+            <dataSource type="org.apache.ibatis.datasource.pooled.PooledDataSourceFactory">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!-- 地址 -->
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=utf-8"/>
+                <!-- 用户名 -->
+                <property name="username" value="root"/>
+                <!-- 密码 -->
+                <property name="password" value="123123"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--Mapper注册-->
+    <mappers>
+        <!--注册Mapper文件的所在位置-->
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/BookMapper.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace = 所需实现的接口全限定名-->
+<mapper namespace="com.springbootmybatis.mapper.UserMapper">
+    <!--直接使用参数名...-->
+    <select id="selectUserByIdAndPwd" resultType="User">
+        SELECT id,name,password,sex,birthday,registTime
+        FROM t_users
+        WHERE id = #{id}
+          AND password = #{pwd}
+    </select>
+
+    <select id="selectUserByIdAndPwd4" resultType="User">
+        SELECT id,name,password,sex,birthday,registTime
+        FROM t_users
+        WHERE id = #{id}
+          AND password = #{pwd}
+    </select>
+
+    <select id="selectUserByUserInfo" resultType="User">
+        SELECT id,name,password,sex,birthday,registTime
+        FROM t_users
+        WHERE id = #{id}
+          AND password = #{password}
+    </select>
+
+    <!-- 使用concat函数拼接'%' -->
+<!--    <select id="selectUsersByKeyword" resultType="User">-->
+<!--        SELECT id,name,password,sex,birthday,registTime-->
+<!--        FROM t_users-->
+<!--        WHERE name LIKE concat('%', #{keyword}, '%')-->
+<!--    </select>-->
+
+<!--    <select id="selectUsersByKeyword" resultType="user">-->
+<!--        SELECT id,name,password,sex,birthday,registTime-->
+<!--        FROM t_users-->
+<!--        WHERE name LIKE '%${keyword}%'-->
+<!--    </select>-->
+
+<!--    最完美的解决方案 -->
+    <select id="selectUsersByKeyword" resultType="user">
+        <bind name="sdfsdf" value="'%' + _param + '%'"/>
+        SELECT id,name,password,sex,birthday,registTime
+        FROM t_users
+        WHERE name LIKE #{sdfsdf}
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM t_users
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="user">
+        UPDATE t_users SET name=#{name}, password=#{password}, sex=#{sex}, birthday=#{birthday}
+        WHERE id = #{id}
+    </update>
+
+    <insert id="insertUser" parameterType="user">
+        INSERT INTO t_users
+        VALUES (#{id}, #{name}, #{password}, #{sex}, #{birthday}, #{registTime});
+    </insert>
+
+    <sql id="userColumns">
+        id,name,password,sex,birthday,registTime
+    </sql>
+
+    <select id="selectUserById" resultType="User">
+        SELECT <include refid="userColumns"/> FROM t_users WHERE id = #{id}
+    </select>
+</mapper>

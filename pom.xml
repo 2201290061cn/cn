@@ -10,6 +10,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-core</module>
+        <module>springboot-demo</module>
+        <module>springboot-web</module>
+        <module>mybatis</module>
+        <module>springboot-mybatis</module>
     </modules>
 
     <properties>
